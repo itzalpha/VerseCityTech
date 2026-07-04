@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VerseCity Technology — A digital city of innovation. Verse Hub, Verse Labs, Verse Mine">
+    <title>VerseCity Technology — A Digital City of Innovation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .labs-sub-label {
+            grid-column: 1 / -1;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted, #888);
+            padding: 0.5rem 0 0.75rem;
+            border-bottom: 1px solid var(--border, #e8e8e8);
+            margin-bottom: 0.25rem;
+        }
+        .labs-sub-label:not(:first-child) { margin-top: 1.5rem; }
+
+        /* GoldCity venture button */
+        .goldcity-venture {
+            display: inline-flex; align-items: center; gap: 0.55rem;
+            padding: 0.6rem 1.3rem;
+            border: 1.5px solid rgba(184,150,46,0.35);
+            background: rgba(184,150,46,0.06);
+            color: #8A6E1A;
+            border-radius: 4px;
+            font-size: 0.8rem; font-weight: 600;
+            text-decoration: none; letter-spacing: 0.3px;
+            transition: border-color 0.25s, background 0.25s, color 0.25s;
+            font-family: var(--font-body);
+        }
+        .goldcity-venture:hover {
+            border-color: rgba(184,150,46,0.7);
+            background: rgba(184,150,46,0.12);
+            color: #6B5214;
+        }
+        .goldcity-venture .gc-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #B8962E; opacity: 0.8; flex-shrink: 0;
+        }
+        .goldcity-venture .gc-label-mono {
+            font-family: var(--font-mono);
+            font-size: 0.62rem; letter-spacing: 1.5px;
+            text-transform: uppercase; opacity: 0.6;
+            margin-left: 0.2rem;
+        }
+
+        /* ── Verse Labs tabs ── */
+        .labs-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.75rem;
+            border-bottom: 1px solid var(--border, #e8e8e8);
+        }
+        .labs-tab-btn {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: none;
+            border: none;
+            padding: 0.7rem 0.2rem;
+            margin-right: 1.5rem;
+            color: var(--muted, #888);
+            cursor: pointer;
+            position: relative;
+            transition: color 0.25s;
+        }
+        .labs-tab-btn::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: -1px;
+            height: 2px;
+            background: transparent;
+            transition: background 0.25s;
+        }
+        .labs-tab-btn.active {
+            color: var(--ink, #1a1a1a);
+        }
+        .labs-tab-btn.active::after {
+            background: var(--ink, #1a1a1a);
+        }
+        .labs-tab-panel { display: none; }
+        .labs-tab-panel.active { display: contents; }
+
+        /* Archive rows reused inside Labs tab */
+        .archive-list-inline {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── NAVIGATION ── -->
+<header id="header">
+    <nav>
+        <a href="#home" class="logo-wrap">
+            <img src="images/versecity_logo.png" alt="VerseCity Technology" class="logo-img"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="logo-mark logo-mark-fallback" style="display:none;">V</div>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#hub">Verse Hub</a></li>
+            <li><a href="#labs">Verse Labs</a></li>
+            <li><a href="#books">Verse Books</a></li>
+            <li><a href="#labs" onclick="setTimeout(()=>showLabsTab('archive'),350)">Archive</a></li>
+            <li><a href="#founder">Founder</a></li>
+            <li><a href="#affiliation" class="nav-cta">Affiliation</a></li>
+        </ul>
+        <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+    </nav>
+</header>
+
+<div class="mobile-nav" id="mobileNav">
+    <a href="#about" onclick="closeMenu()">About</a>
+    <a href="#hub" onclick="closeMenu()">Verse Hub</a>
+    <a href="#labs" onclick="closeMenu()">Verse Labs</a>
+    <a href="#books" onclick="closeMenu()">Verse Books</a>
+    <a href="#labs" onclick="closeMenu();setTimeout(()=>showLabsTab('archive'),350)">Archive</a>
+    <a href="#founder" onclick="closeMenu()">Founder</a>
+    <a href="#affiliation" onclick="closeMenu()">Affiliation</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="home">
+    <div class="hero-bg-line h t1"></div>
+    <div class="hero-bg-line v v1"></div>
+    <div class="hero-bg-line v v2"></div>
+    <div class="hero-deco" aria-hidden="true">V</div>
+
+    <div class="hero-inner">
+        <div class="hero-left">
+            <div class="hero-tag">A City On the Web</div>
+            <h1>Verse<em>City</em><br>Technology</h1>
+            <p class="hero-sub">Building the Verse Ecosystem</p>
+            <p class="hero-desc">
+                A digital city of interconnected systems, products, and communities — where consumer engagement, innovation, industry intelligence, and social impact coexist across distinct districts.
+            </p>
+            <div class="hero-ctas">
+                <a href="#hub" class="btn-navy"><i class="fas fa-layer-group"></i> Verse Hub</a>
+                <a href="#labs" class="btn-ghost"><i class="fas fa-flask"></i> Verse Labs</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <div class="hero-card-header">
+                <span class="hero-card-title">versecity_districts.map</span>
+                <div class="hero-card-dots">
+                    <div class="h-dot a"></div>
+                    <div class="h-dot b"></div>
+                    <div class="h-dot c"></div>
+                </div>
+            </div>
+            <div class="district-row">
+                <div class="d-badge navy">HUB</div>
+                <div>
+                    <div class="d-label">Verse Hub</div>
+                    <div class="d-sub">Gift Verse · Recharge Verse</div>
+                </div>
+            </div>
+            <div class="district-row">
+                <div class="d-badge slate">LAB</div>
+                <div>
+                    <div class="d-label">Verse Labs</div>
+                    <div class="d-sub">Campus Verse · Mock Practice Pro · Spark Cards · Neo Encarta Kids</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── STRIP ── -->
+<div class="strip">
+    <div class="strip-track">
+        <span class="strip-item"><span class="s-dot"></span>Verse Hub</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Labs</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Kids</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Health</span>
+        <span class="strip-item"><span class="s-dot"></span>Consumer Engagement</span>
+        <span class="strip-item"><span class="s-dot"></span>Digital Rewards</span>
+        <span class="strip-item"><span class="s-dot"></span>A Digital City</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Hub</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Labs</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Kids</span>
+        <span class="strip-item"><span class="s-dot"></span>Verse Health</span>
+        <span class="strip-item"><span class="s-dot"></span>Consumer Engagement</span>
+        <span class="strip-item"><span class="s-dot"></span>Digital Rewards</span>
+        <span class="strip-item"><span class="s-dot"></span>A Digital City</span>
+    </div>
+</div>
+
+<!-- ── ABOUT ── -->
+<section class="section-wrap alt" id="about">
+    <div class="section-inner">
+        <div class="reveal">
+            <div class="section-eyebrow">Who We Are</div>
+            <h2 class="section-h2">More than apps —<br><em>a digital city</em></h2>
+            <p class="section-lead">
+                VerseCity Technology is a multi-district digital ecosystem rooted in consumer engagement, innovation, industry intelligence, and community impact. Every district serves a distinct purpose — together they form a living city.
+            </p>
+        </div>
+        <div class="about-grid">
+            <div class="reveal">
+                <p style="font-size:0.93rem;line-height:1.9;color:var(--ink-mid);">
+Founded by a mining engineer turned tech entrepreneur, VerseCity reflects a dual identity: the precision of industry and the creativity of software — combined into one ecosystem.
+                </p>
+            </div>
+            <div class="about-pillars reveal">
+                <div class="pillar">
+                    <div class="pillar-label">Vision</div>
+                    <p>
+To become the world's most coherent digital city — a platform where every district solves a real problem and every product ships with the conviction that ease should always be an option.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── VERSE HUB ── -->
+<section class="section-wrap" id="hub">
+    <div class="section-inner">
+        <div class="district-header reveal">
+            <div>
+                <div class="section-eyebrow">District 01</div>
+                <h2 class="section-h2">Verse <em>Hub</em></h2>
+                <p class="section-lead">The consumer activity district — where users interact, transact, earn, and engage with brands through rewards and digital commerce.</p>
+            </div>
+        </div>
+        <div class="hub-grid reveal">
+            <div class="hub-card">
+                <div class="hub-logo">
+                    <img src="images/gift_verse_logo.png" alt="Gift Verse"
+                         onerror="this.parentElement.innerHTML='GV'">
+                </div>
+                <h3>Gift Verse</h3>
+                <p>A smart reward platform empowering businesses to delight customers through promo campaigns. Users participate in raffle draws or cashback campaigns to win cash points — turning every purchase into an experience that builds loyalty.</p>
+                <div class="hub-btns">
+                    <a href="https://play.google.com/store/apps/details?id=com.versecitytech.giftverse" target="_blank" class="h-btn fill">
+                        <i class="fab fa-google-play"></i> Play Store
+                    </a>
+                    <a href="https://gift-verse.firebaseapp.com/" target="_blank" class="h-btn line">
+                        <i class="fas fa-globe"></i> Website
+                    </a>
+                </div>
+            </div>
+            <div class="hub-card">
+                <div class="hub-logo">
+                    <img src="images/recharge_ng.jpg" alt="Recharge Verse"
+                         onerror="this.parentElement.innerHTML='RV'">
+                </div>
+                <h3>Recharge Verse</h3>
+                <p>Simplified airtime voucher purchases for Nigerians. Instantly buy recharge pins for MTN, Airtel, 9Mobile, and Glo through a fast, secure platform. No stress — top up in seconds from anywhere.</p>
+                <div class="hub-btns">
+                    <a href="https://play.google.com/store/apps/details?id=com.versecitytech.mtnairtelrechargecards" target="_blank" class="h-btn fill">
+                        <i class="fab fa-google-play"></i> Play Store
+                    </a>
+                    <a href="https://recharge-verse.firebaseapp.com/" target="_blank" class="h-btn line">
+                        <i class="fas fa-globe"></i> Website
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── VERSE LABS ── -->
+<section class="section-wrap alt" id="labs">
+    <div class="section-inner">
+        <div class="district-header reveal">
+            <div>
+                <div class="section-eyebrow">District 02</div>
+                <h2 class="section-h2">Verse <em>Labs</em></h2>
+                <p class="section-lead">The innovation and learning district — where ideas, education, creativity, and community are developed into real products.</p>
+            </div>
+        </div>
+
+        <div class="labs-tabs reveal">
+            <button class="labs-tab-btn active" id="labs-tab-active-btn" onclick="showLabsTab('active')">Active Projects</button>
+            <button class="labs-tab-btn" id="labs-tab-archive-btn" onclick="showLabsTab('archive')">Archive</button>
+        </div>
+
+        <div class="labs-tab-panel active" id="labs-panel-active">
+            <div class="app-grid reveal">
+                <div class="labs-sub-label">Learning &amp; Academic</div>
+                <div class="app-card">
+                    <div class="hub-logo">
+                    <img src="images/campus_logo .jpg" alt="Campus Verse"
+                         onerror="this.parentElement.innerHTML='CV'">
+                </div>
+                    <h4>Campus Verse</h4>
+                    <p>An academic companion built for Nigerian students — campus resources, study tools, and a community layer for university life.</p>
+                    <div class="hub-btns">
+                        <a href="https://play.google.com/store/apps/details?id=com.versecitytech.campusverse&hl=en" target="_blank" class="h-btn fill">
+                            <i class="fab fa-google-play"></i> Play Store
+                        </a>
+                        <span class="h-btn line" style="cursor:default;opacity:0.6;"><i class="fas fa-clock"></i> Website In Development</span>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="hub-logo">
+                    <img src="images/mock_exams_logo.jpg" alt="Mock Practice Pro"
+                         onerror="this.parentElement.innerHTML='ME'">
+                </div>                    <h4>Mock Practice Pro</h4>
+                    <p>Exam preparation done right. Practice with past questions, timed sessions, and subject-specific drills designed for WAEC, JAMB, and beyond.</p>
+                    <div class="hub-btns">
+                        <a href="https://play.google.com/store/apps/details?id=com.versecitytech.mockexamsverse&hl=en" target="_blank" class="h-btn fill">
+                            <i class="fab fa-google-play"></i> Play Store
+                        </a>
+                        <span class="h-btn line" style="cursor:default;opacity:0.6;"><i class="fas fa-clock"></i> Website In Development</span>
+                    </div>
+                </div>
+                <div class="labs-sub-label">Social &amp; Connection</div>
+                <div class="app-card">
+                    <div class="hub-logo">
+                    <img src="images/spark_conversation_card.jpg" alt="Spark Conversation"
+                         onerror="this.parentElement.innerHTML='SC'">
+                </div>
+                    <h4>Spark Conversation Cards</h4>
+                    <p>A digital card deck designed to spark meaningful conversations — for friends, couples, or teams looking to connect beyond the surface.</p>
+                    <div class="hub-btns">
+                        <a href="https://play.google.com/store/apps/details?id=com.versecitytech.conversationcard&hl=en" target="_blank" class="h-btn fill">
+                            <i class="fab fa-google-play"></i> Play Store
+                        </a>
+                        <span class="h-btn line" style="cursor:default;opacity:0.6;"><i class="fas fa-clock"></i> Website In Development</span>
+                    </div>
+                </div>
+                <div class="labs-sub-label">Kids</div>
+                <div class="app-card">
+                    <div class="app-icon">
+                        <img src="images/encarta_logo.png" alt="Neo Encarta Kids"
+                             onerror="this.parentElement.innerHTML='NE'">
+                    </div>
+                    <h4>Neo Encarta Kids</h4>
+                    <p>An interactive knowledge companion for children — exploring science, history, nature, and culture through engaging content built for young curious minds.</p>
+                    <div class="hub-btns">
+                        <a href="https://play.google.com/store/apps/details?id=com.versecitytech.encartakids&hl=en" target="_blank" class="h-btn fill">
+                            <i class="fab fa-google-play"></i> Play Store
+                        </a>
+                        <span class="h-btn line" style="cursor:default;opacity:0.6;"><i class="fas fa-clock"></i> Website In Development</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="labs-tab-panel" id="labs-panel-archive">
+            <div class="app-grid reveal">
+                <div class="labs-sub-label">Discontinued Projects</div>
+                <p style="grid-column:1/-1;font-size:0.85rem;line-height:1.8;color:var(--ink-mid);margin:-0.25rem 0 0.75rem;">
+                    Every builder has shelves. These projects were real — they were built, tested, and learned from. They no longer run, but they remain part of the story.
+                </p>
+                <div class="archive-list-inline">
+                    <div class="archive-row">
+                        <div class="archive-info">
+                            <h5>Escrow Platform</h5>
+                            <p>A peer-to-peer escrow service for secure digital transactions. Discontinued due to regulatory complexity and scope.</p>
+                        </div>
+                        <span class="archive-badge">Discontinued</span>
+                    </div>
+                    <div class="archive-row">
+                        <div class="archive-info">
+                            <h5>Psychology Games</h5>
+                            <p>Early prototype of interactive psychology-based mini-games exploring cognitive patterns and personality insights.</p>
+                        </div>
+                        <span class="archive-badge">Discontinued</span>
+                    </div>
+                </div>
+                <a href="https://itzlonelyalpha-projects-vault.web.app" target="_blank" class="district-link" style="grid-column:1/-1;margin-top:0.5rem;">
+                    View all in Verse Vault <i class="fas fa-arrow-right" style="font-size:0.6rem;"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- ── VERSE BOOKS ── -->
+<section class="section-wrap" id="books">
+    <div class="section-inner">
+        <div class="district-header reveal">
+            <div>
+                <div class="section-eyebrow">District 04</div>
+                <h2 class="section-h2">Verse <em>Books</em></h2>
+                <p class="section-lead">Books written by Mukhtar Ahmed</p>
+            </div>
+        </div>
+        <div class="books-grid reveal">
+            <a href="https://selar.com/r411n7" target="_blank" class="book-card" style="text-decoration:none;">
+                <div class="book-cover">
+                    <img src="images/diary_of_a_ceo.jpg" alt="Journal of a CEO"
+                         onerror="this.parentElement.innerHTML='<div class=\'book-cover-fallback\'>Journal of a CEO</div>'">
+                </div>
+                <div class="book-info">
+                    <div class="book-label">Non-Fiction</div>
+                    <h4>Journal of a CEO</h4>
+                    <p>A founder's journal capturing the lessons, insights, challenges, and discoveries that have shaped my startup journey.</p>
+                    <span class="app-tag navy">By the Founder</span>
+                </div>
+            </a>
+            <a href="https://selar.com/r411n7" target="_blank" class="book-card" style="text-decoration:none;">
+                <div class="book-cover">
+                    <img src="images/diary_of_a_ceo.jpg" alt="Journal of a Miner"
+                         onerror="this.parentElement.innerHTML='<div class=\'book-cover-fallback\'>Journal of a Miner</div>'">
+                </div>
+                <div class="book-info">
+                    <div class="book-label">Non-Fiction</div>
+                    <h4>Journal of a Miner</h4>
+                    <p>A personal journal of my journey into mining, documenting lessons, discoveries, and insights about gold, mineral exploration, and the world of mining.</p>
+                    <span class="app-tag navy">By the Founder</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ── VERSE AFFILIATION ── -->
+<section class="section-wrap dark" id="affiliation">
+    <div class="section-inner">
+        <div class="district-header reveal">
+            <div>
+                <div class="section-eyebrow light">Verse Affiliation</div>
+                <h2 class="section-h2 light">Companies We Work <em>With</em></h2>
+                <p class="section-lead light">VerseCity doesn't operate in isolation. These are the companies and partners we're affiliated with across our districts.</p>
+            </div>
+        </div>
+        <div class="affil-grid reveal">
+            <div class="affil-card">
+                <div class="affil-logo">NB</div>
+                <div class="affil-name">Nexabill</div>
+                <div class="affil-desc">Billing and payment infrastructure partner.</div>
+            </div>
+
+                <div class="affil-card">
+                <div class="affil-logo">19</div>
+                <div class="affil-name">19 Goldfield</div>
+                <div class="affil-desc">Solid mineral exxploration & Mining company.</div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ── FOUNDER ── -->
+<section class="section-wrap" id="founder">
+    <div class="section-inner">
+        <div class="founder-grid">
+            <div class="founder-sticky reveal">
+                <div class="founder-img">
+                    <img src="images/ceo_1.jpg" alt="Mukhtar Ahmed (Ajibola)"
+                         onerror="this.parentElement.innerHTML='<div class=\'founder-img-fallback\'>MA</div>'">
+                </div>
+                <div class="founder-socials">
+                    <a href="https://x.com/KoredeAhmed1" target="_blank" class="s-btn" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="https://www.instagram.com/itzlonelyalphamk/" target="_blank" class="s-btn" title="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.tiktok.com/@choosenalphamk" target="_blank" class="s-btn" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+
+            <div class="reveal">
+                <div class="section-eyebrow">The Founder</div>
+                <h2 class="section-h2" style="margin-bottom:0.4rem;">Mukhtar Ahmed<br><em>(Ajibola)</em></h2>
+                <div class="founder-role">Founder & CEO · VerseCity</div>
+
+                <p class="founder-bio">
+                    I am a Software Developer, Technical Founder, and Mining Engineer with experience building digital products, coordinating multidisciplinary projects, and supporting mineral resource operations. My career spans software development, entrepreneurship, engineering, and project coordination — bridging technical execution with strategic planning.
+                </p>
+                <p class="founder-bio">
+                    As the founder of VerseCity Technology, I have designed and launched multiple software products while leading development teams, managing project delivery, and driving product growth. Alongside my technology background, I hold practical mining engineering experience in geological mapping, GIS systems, mine planning, and mineral exploration for Gold.
+                </p>
+                <p class="founder-bio">
+                    I thrive at the intersection of technology, engineering, and operations — transforming ideas into structured, scalable, and impactful solutions.
+                </p>
+
+                <div class="founder-quote">
+                    <p>"We don't just build software — we combine knowledge and wisdom to make an impact"</p>
+                </div>
+
+                <!-- ── Founder CTA row ── -->
+                <div style="margin-top:2rem; display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center;">
+                    <a href="https://my-portfolio-itzlonelyalpha.firebaseapp.com/" target="_blank" class="btn-navy">
+                        <i class="fas fa-user-circle"></i> Portfolio
+                    </a>
+                    <span class="h-btn line" style="cursor:default;opacity:0.6;font-size:0.78rem;">
+                        <i class="fas fa-clock"></i> My Team
+                    </span>
+
+            
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer id="contact">
+    <div class="footer-inner">
+        <div class="footer-top">
+            <div class="f-brand">
+                <span class="f-brand-name">VerseCity</span>
+                <p>A digital city<br><br>City · 2026</p>
+            </div>
+            <div class="f-col">
+                <h4>Districts</h4>
+                <a href="#hub">Verse Hub</a>
+                <a href="#labs">Verse Labs</a>
+                <a href="#books">Verse Books</a>
+            </div>
+            <div class="f-col">
+                <h4>More</h4>
+                <a href="#labs" onclick="setTimeout(()=>showLabsTab('archive'),350)">Verse Archive</a>
+                <a href="#affiliation">Affiliation</a>
+            </div>
+            <div class="f-col">
+                <h4>Contact</h4>
+                <a href="mailto:abuhamamah70@gmail.com">abuhamamah70@gmail.com</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2025 VerseCity Technology. All rights reserved.</span>
+            <span class="footer-motto">combining knowledge and wisdom to make an impact</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('solid', window.scrollY > 40);
+    });
+    function toggleMenu() {
+        document.getElementById('mobileNav').classList.toggle('open');
+    }
+    function closeMenu() {
+        document.getElementById('mobileNav').classList.remove('open');
+    }
+    function showLabsTab(which) {
+        const activeBtn = document.getElementById('labs-tab-active-btn');
+        const archiveBtn = document.getElementById('labs-tab-archive-btn');
+        const activePanel = document.getElementById('labs-panel-active');
+        const archivePanel = document.getElementById('labs-panel-archive');
+        if (which === 'archive') {
+            archiveBtn.classList.add('active');
+            activeBtn.classList.remove('active');
+            archivePanel.classList.add('active');
+            activePanel.classList.remove('active');
+        } else {
+            activeBtn.classList.add('active');
+            archiveBtn.classList.remove('active');
+            activePanel.classList.add('active');
+            archivePanel.classList.remove('active');
+        }
+    }
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            const target = document.querySelector(a.getAttribute('href'));
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior:'smooth', block:'start' });
+                closeMenu();
+            }
+        });
+    });
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold:0.07, rootMargin:'0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach((el, i) => {
+        el.style.transitionDelay = `${(i % 4) * 0.08}s`;
+        obs.observe(el);
+    });
+</script>
+</body>
+</html>
