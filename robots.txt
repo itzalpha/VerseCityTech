@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://verse-city-tech.vercel.app/sitemap.xml
+
+# Crawl delay (ignored by Google, respected by some bots)
+Crawl-delay: 5
