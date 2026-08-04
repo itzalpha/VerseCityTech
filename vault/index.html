@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VerseCity Verse Vault — A complete archive of discontinued and shelved projects by VerseCity Technology.">
+    <title>Verse Vault — VerseCity Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600;1,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="vault.css">
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+    <div class="site-header-inner">
+        <div class="header-left">
+            <a href="index.html" class="back-link">
+                <span class="back-arrow"><i class="fas fa-arrow-left"></i></span>
+                <span class="back-text">Back to VerseCity</span>
+            </a>
+        </div>
+        <div class="header-center">
+            <span class="header-title">Verse Vault</span>
+        </div>
+        <div class="header-right">
+            <span class="header-tag">Archive</span>
+        </div>
+    </div>
+</header>
+
+<!-- ── VAULT HERO ── -->
+<div class="vault-hero">
+    <div class="vault-hero-inner">
+        <div>
+            <div class="vault-eyebrow">VerseCity Technology</div>
+            <h1 class="vault-title">Verse<br><em>Vault</em></h1>
+            <p class="vault-sub">// A complete archive of shelved, discontinued, and superseded projects</p>
+        </div>
+        <div class="vault-stats">
+            <div class="vstat">
+                <div class="vstat-num" id="stat-total">0</div>
+                <div class="vstat-label">Total</div>
+            </div>
+            <div class="vstat">
+                <div class="vstat-num" id="stat-disc">0</div>
+                <div class="vstat-label">Discontinued</div>
+            </div>
+            <div class="vstat">
+                <div class="vstat-num" id="stat-arch">0</div>
+                <div class="vstat-label">Archived</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ── FILTERS ── -->
+<div class="filters-bar">
+    <div class="filters-inner">
+        <span class="filters-label">Filter:</span>
+        <button class="fbtn on" data-f="all">All</button>
+        <button class="fbtn" data-f="discontinued">Discontinued</button>
+        <button class="fbtn" data-f="archived">Archived</button>
+        <button class="fbtn" data-f="superseded">Superseded</button>
+        <button class="fbtn" data-f="prototype">Prototype</button>
+    </div>
+</div>
+
+<!-- ── MAIN ── -->
+<main class="vault-main">
+
+    <!-- Discontinued -->
+    <div class="vsection" id="sec-disc">
+        <div class="vsection-head">
+            <div class="vsection-title-wrap">
+                <div class="vsection-icon disc"><i class="fas fa-ban"></i></div>
+                <span class="vsection-title">Discontinued</span>
+            </div>
+            <span class="vsection-count" id="count-disc">0 projects</span>
+        </div>
+        <div class="cards-grid" id="grid-disc"></div>
+    </div>
+
+    <!-- Archived / Deleted -->
+    <div class="vsection" id="sec-arch">
+        <div class="vsection-head">
+            <div class="vsection-title-wrap">
+                <div class="vsection-icon arch"><i class="fas fa-box-archive"></i></div>
+                <span class="vsection-title">Archived</span>
+            </div>
+            <span class="vsection-count" id="count-arch">0 projects</span>
+        </div>
+        <div class="cards-grid" id="grid-arch"></div>
+    </div>
+
+</main>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────────────────────
+// status options: 'discontinued' | 'archived' | 'superseded' | 'prototype'
+
+const PROJECTS = [
+    // ── DISCONTINUED ──
+
+    {
+        id: 'secure-deals',
+        name: 'Secure Deals',
+        logo: 'images/secure_deals.jpg',
+        logoFallback: 'SD',
+        status: 'discontinued',
+        desc: 'An early escrow and secure transaction experiment. Fully removed after a pivot in product strategy.',
+        endDate: 'Jan 2023',
+    },
+
+    {
+        id: 'urgent-2k',
+        name: 'Urgent 2k',
+        logo: 'images/urgent2k.jpg',
+        logoFallback: 'U2',
+        status: 'discontinued',
+        desc: 'An early peer-to-peer micro-lending experiment — connecting people who needed small emergency funds with those willing to lend. Removed following a product strategy change.',
+        endDate: 'Jan 2023',
+    },
+
+    {
+        id: 'qa-events',
+        name: 'Q&A for Events',
+        logo: 'images/qandalogo.jpg',
+        logoFallback: 'QA',
+        status: 'discontinued',
+        desc: 'A live Q&A and audience engagement tool built for events and conferences — letting attendees submit and upvote questions in real time. Removed after a pivot in product direction.',
+        endDate: 'Jan 2023',
+    },
+
+    // ── ARCHIVED ──
+    {
+        id: 'psych-games',
+        name: 'Psychology Games',
+        logo: 'images/psychologygameslogo.jpg',
+        logoFallback: 'PG',
+        status: 'archived',
+        desc: 'An interactive psychology and personality game experiment — exploring cognitive patterns and personality insights through gamified experiences. Discontinued after a strategic product review.',
+        endDate: 'Jan 2023',
+    },
+
+    
+];
+
+// ── RENDER ──────────────────────────────────────────────────────────────
+
+let activeFilter = 'all';
+
+const BADGE_MAP = {
+    discontinued: '<span class="badge discontinued">Discontinued</span>',
+    archived:     '<span class="badge archived">Archived</span>',
+    superseded:   '<span class="badge superseded">Superseded</span>',
+    prototype:    '<span class="badge prototype">Prototype</span>',
+};
+
+
+function renderCard(p) {
+    const logoHtml = p.logo
+        ? `<div class="card-logo"><img src="${p.logo}" alt="${p.name}" onerror="this.parentElement.innerHTML='<span class=\\'card-logo-fallback\\'>${p.logoFallback}</span>'"></div>`
+        : `<div class="card-logo"><span class="card-logo-fallback">${p.logoFallback}</span></div>`;
+
+    const cardType = (p.status === 'discontinued') ? 'disc' : 'arch';
+
+    return `
+    <div class="app-card ${cardType}" data-status="${p.status}">
+        <div class="card-top">
+            ${logoHtml}
+            <div class="card-title-area">
+                <div class="card-name">${p.name}</div>
+                <div class="card-badges">${BADGE_MAP[p.status] || ''}</div>
+            </div>
+        </div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-meta">
+            <span class="card-end-date">
+                <i class="fas fa-clock"></i>
+                ${p.endDate ? `Ended: ${p.endDate}` : 'Date unknown'}
+            </span>
+        </div>
+    </div>`;
+}
+
+function render() {
+    const f = activeFilter;
+
+    // Discontinued section: discontinued status
+    let discProjects = PROJECTS.filter(p => p.status === 'discontinued');
+    // Archived section: archived + superseded + prototype
+    let archProjects = PROJECTS.filter(p => ['archived','superseded','prototype'].includes(p.status));
+
+    // Apply filter
+    if (f !== 'all') {
+        discProjects = discProjects.filter(p => p.status === f);
+        archProjects = archProjects.filter(p => p.status === f);
+    }
+
+    // Render
+    const discGrid = document.getElementById('grid-disc');
+    const archGrid = document.getElementById('grid-arch');
+
+    discGrid.innerHTML = discProjects.length
+        ? discProjects.map(renderCard).join('')
+        : '<div class="empty-state">No projects match this filter</div>';
+
+    archGrid.innerHTML = archProjects.length
+        ? archProjects.map(renderCard).join('')
+        : '<div class="empty-state">No projects match this filter</div>';
+
+    // Counts
+    document.getElementById('count-disc').textContent = `${discProjects.length} project${discProjects.length !== 1 ? 's' : ''}`;
+    document.getElementById('count-arch').textContent = `${archProjects.length} project${archProjects.length !== 1 ? 's' : ''}`;
+
+    // Show/hide sections
+    document.getElementById('sec-disc').style.display =
+        (f === 'all' || f === 'discontinued') ? '' : 'none';
+    document.getElementById('sec-arch').style.display =
+        (f === 'all' || f === 'archived' || f === 'superseded' || f === 'prototype') ? '' : 'none';
+
+    // Header stats
+    const total = PROJECTS.length;
+    const disc  = PROJECTS.filter(p => p.status === 'discontinued').length;
+    const arch  = PROJECTS.filter(p => p.status !== 'discontinued').length;
+    document.getElementById('stat-total').textContent = total;
+    document.getElementById('stat-disc').textContent  = disc;
+    document.getElementById('stat-arch').textContent  = arch;
+}
+
+// Filter clicks
+document.querySelector('.filters-inner').addEventListener('click', e => {
+    const btn = e.target.closest('.fbtn');
+    if (!btn) return;
+    document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    activeFilter = btn.dataset.f;
+    render();
+});
+
+render();
+</script>
+</body>
+</html>
