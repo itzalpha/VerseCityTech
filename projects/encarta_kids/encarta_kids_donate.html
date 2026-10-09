@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support Neo Encarta Kids | Versecity Tech</title>
+<meta name="description" content="Help build the next chapter of Neo Encarta Kids, a free educational encyclopedia for children. Our goal: $2,000 to add more languages, new articles, downloadable books, learning games and parental controls.">
+<meta name="theme-color" content="#6D3FF0">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Help build the next chapter of Neo Encarta Kids">
+<meta property="og:description" content="A free encyclopedia for curious children. Help us reach $2,000 to add more languages, new articles, downloadable books, learning games and parental controls.">
+<meta name="twitter:card" content="summary">
+<!-- Optional, once the page is live: add og:url and an og:image (1200x630) so shared links show a preview picture. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple: #6D3FF0;
+    --blue: #0B72B5;
+    --sky: #EAF6FF;
+    --ink: #1F2340;
+    --muted: #55596F;
+    --gold-bg: #FFF3D6;
+    --gold-line: #FFD36B;
+    --white: #FFFFFF;
+    --radius: 24px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: "Nunito", "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--sky);
+    line-height: 1.6;
+    font-size: 17px;
+  }
+  a { color: var(--purple); }
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .skip { position: absolute; left: -999px; top: 8px; background: var(--white); color: var(--ink); padding: 10px 16px; border-radius: 8px; z-index: 10; font-weight: 800; }
+  .skip:focus { left: 8px; }
+  .wrap { width: min(960px, 100% - 40px); margin-inline: auto; }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: var(--white);
+    border-radius: 0 0 44px 44px;
+    padding: 64px 0 88px;
+    text-align: center;
+  }
+  .hero .deco { position: absolute; pointer-events: none; user-select: none; }
+  .hero .d1 { top: 22px; left: 8%; font-size: 26px; }
+  .hero .d2 { top: 40px; right: 10%; font-size: 44px; opacity: .9; }
+  .hero .d3 { bottom: 34px; left: 14%; font-size: 40px; opacity: .85; }
+  .hero .d4 { bottom: 40px; right: 18%; font-size: 22px; }
+  .brand { font-weight: 800; font-size: 18px; opacity: .95; margin: 0 0 12px; }
+  h1 {
+    font-weight: 800;
+    font-size: clamp(30px, 6vw, 52px);
+    line-height: 1.15;
+    margin: 0 auto 16px;
+    max-width: 18ch;
+  }
+  .hero p.lead { font-size: clamp(17px, 2.4vw, 21px); max-width: 38em; margin: 0 auto 28px; opacity: .97; }
+  .btn {
+    display: inline-block;
+    font-family: inherit;
+    font-weight: 800;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 999px;
+    border: 3px solid transparent;
+    transition: transform .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-light { background: var(--white); color: var(--purple); }
+  .btn-solid { background: var(--purple); color: var(--white); }
+  .btn-line { background: transparent; color: var(--purple); border-color: var(--purple); }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: -48px;
+    position: relative;
+  }
+  .stat {
+    background: var(--white);
+    border: 3px solid rgba(0,0,0,.08);
+    border-radius: var(--radius);
+    padding: 22px 12px;
+    text-align: center;
+  }
+  .stat strong { display: block; font-size: clamp(26px, 5vw, 40px); font-weight: 800; color: var(--purple); line-height: 1.1; }
+  .stat span { color: var(--muted); font-size: 15px; }
+  .stat.goal { background: var(--gold-bg); border-color: var(--gold-line); }
+  .fine { color: var(--muted); font-size: 14px; text-align: center; margin: 12px 0 0; }
+
+  /* Sections */
+  section { padding: 56px 0 8px; }
+  h2 { font-weight: 800; font-size: clamp(24px, 4vw, 34px); line-height: 1.2; margin: 0 0 16px; }
+  .story { max-width: 40em; }
+  .story p { margin: 0 0 16px; }
+  .sign { font-weight: 800; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .card {
+    background: var(--white);
+    border: 3px solid rgba(0,0,0,.08);
+    border-radius: var(--radius);
+    padding: 24px;
+  }
+  .card .emoji { font-size: 34px; display: block; margin-bottom: 8px; }
+  .card h3 { font-size: 20px; font-weight: 800; margin: 0 0 6px; line-height: 1.25; }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  .card .btn { margin-top: 16px; font-size: 16px; padding: 12px 24px; }
+
+  /* Closing */
+  .closing {
+    margin: 56px 0 0;
+    background: var(--white);
+    border: 3px solid rgba(0,0,0,.08);
+    border-radius: 32px 32px 0 0;
+    padding: 36px 0 44px;
+    text-align: center;
+  }
+  .closing p { max-width: 36em; margin: 0 auto 12px; color: var(--muted); }
+  .closing .small { font-size: 14px; }
+
+  .note { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .btn { transition: none; }
+    .btn:hover { transform: none; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .hero { padding: 48px 0 76px; border-radius: 0 0 32px 32px; }
+    .stats { gap: 8px; margin-top: -40px; }
+    .stat { padding: 16px 6px; border-radius: 18px; }
+    .stat span { font-size: 13px; }
+    .hero .d3, .hero .d4 { display: none; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hero">
+  <span class="deco d1" aria-hidden="true">⭐</span>
+  <span class="deco d2" aria-hidden="true">☁️</span>
+  <span class="deco d3" aria-hidden="true">🌍</span>
+  <span class="deco d4" aria-hidden="true">✨</span>
+  <div class="wrap">
+    <p class="brand">Neo Encarta Kids</p>
+    <h1>Help build the next chapter of Neo Encarta Kids</h1>
+    <p class="lead">A free encyclopedia for curious children, built over more than two years. Now we need your help to make it bigger, more useful and available in more languages.</p>
+    <a class="btn btn-light" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=abuhamamah70%40gmail.com&amp;item_name=Support%20Neo%20Encarta%20Kids&amp;currency_code=USD" target="_blank" rel="noopener noreferrer" id="donate-top">Support the project</a>
+  </div>
+</header>
+
+<main class="wrap" id="main">
+
+  <div class="stats" role="list">
+    <div class="stat" role="listitem"><strong>11,000+</strong><span>children and families have used the app</span></div>
+    <div class="stat" role="listitem"><strong>2+ years</strong><span>of building and updating</span></div>
+    <div class="stat goal" role="listitem"><strong>$2,000</strong><span>our funding goal</span></div>
+  </div>
+  <p class="fine">User figure as of October 2026.</p>
+
+  <section aria-labelledby="story">
+    <h2 id="story">Why I'm asking for help</h2>
+    <div class="story">
+      <p>Hello, I'm the person behind Neo Encarta Kids. It began as a side project more than two years ago, and I wanted children to have a safe, simple place to look things up and learn about animals, science, people and places around the world.</p>
+      <p>Since then, more than 11,000 people have used it. I have built and kept it going largely on my own. The next stage is bigger than one person can carry, and I'd like to build it with support from parents, teachers and anyone who believes learning should be open to every child.</p>
+      <p class="sign">Thank you for reading.<br>The creator of Neo Encarta Kids, Versecity Tech</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="plan">
+    <h2 id="plan">What your support will help us build</h2>
+    <div class="grid">
+      <div class="card"><span class="emoji" aria-hidden="true">🌐</span><h3>More languages</h3><p>So children can learn in the language they speak at home.</p></div>
+      <div class="card"><span class="emoji" aria-hidden="true">📚</span><h3>Fresh, updated articles</h3><p>New topics and careful updates to what is already there.</p></div>
+      <div class="card"><span class="emoji" aria-hidden="true">⬇️</span><h3>Downloadable books</h3><p>Read offline, wherever the internet is slow or missing.</p></div>
+      <div class="card"><span class="emoji" aria-hidden="true">🎮</span><h3>Learning games</h3><p>Playful ways to practise what children have just discovered.</p></div>
+      <div class="card"><span class="emoji" aria-hidden="true">🔒</span><h3>Parental controls</h3><p>Tools that help parents and teachers guide how the app is used.</p></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="help">
+    <h2 id="help">Three ways to help</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="emoji" aria-hidden="true">💜</span>
+        <h3>Give</h3>
+        <p>Choose any amount. Every contribution moves the next chapter closer.</p>
+        <a class="btn btn-solid" href="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&amp;business=abuhamamah70%40gmail.com&amp;item_name=Support%20Neo%20Encarta%20Kids&amp;currency_code=USD" target="_blank" rel="noopener noreferrer" id="donate-card">Contribute with PayPal</a>
+        <p class="note">Opens PayPal in a new tab. Payments are handled by PayPal, so we never see your card details.</p>
+      </div>
+      <div class="card">
+        <span class="emoji" aria-hidden="true">📣</span>
+        <h3>Share</h3>
+        <p>Tell a parent, a teacher or a school. Sharing this page helps as much as giving.</p>
+      </div>
+      <div class="card">
+        <span class="emoji" aria-hidden="true">🤝</span>
+        <h3>Sponsor</h3>
+        <p>Schools, companies and organisations can support a specific improvement. Get in touch and we'll talk it through.</p>
+        <a class="btn btn-line" href="mailto:abuhamamah70@gmail.com?subject=Sponsoring%20Neo%20Encarta%20Kids">Email us</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="closing">
+  <div class="wrap">
+    <p><strong>Neo Encarta Kids</strong> is made by Versecity Tech. The encyclopedia stays free to use, and we will share updates on how contributions are used.</p>
+    <p class="small">Questions? <a href="mailto:abuhamamah70@gmail.com">abuhamamah70@gmail.com</a></p>
+    <p class="small">Contributions are voluntary donations to support development. They are not an investment, and no financial return is offered.</p>
+  </div>
+</footer>
+
+</body>
+</html>
