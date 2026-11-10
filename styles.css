@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════
-   VERSECITY TECHNOLOGY — White Luxury / Navy
+   VERSECITY TECHNOLOGY — Modern Startup / Navy
    ═══════════════════════════════════════════════ */
 :root {
     --white:        #FFFFFF;
@@ -17,9 +17,9 @@
     --gold:         #B8962E;
     --gold-light:   rgba(184,150,46,0.12);
 
-    --font-display: 'Cormorant Garamond', serif;
-    --font-body:    'Outfit', sans-serif;
-    --font-mono:    'DM Mono', monospace;
+    --font-display: 'Plus Jakarta Sans', 'Inter', sans-serif;
+    --font-body:    'Inter', system-ui, sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -710,3 +710,100 @@ footer {
     .labs-tabs { gap: 0.2rem; }
     .labs-tab-btn { margin-right: 1rem; font-size: 0.68rem; }
 }
+
+/* ═══════════════════════════════════════════════
+   STARTUP REFRESH — overrides (appended; originals above untouched)
+   ═══════════════════════════════════════════════ */
+:root { --accent:#0D1F3C; --accent-2:#1A3460; }
+#hub    { --accent:#0D1F3C; --accent-2:#1A3460; }
+#studio { --accent:#6D28D9; --accent-2:#5B21B6; }
+#labs   { --accent:#0F766E; --accent-2:#115E59; }
+#gold   { --accent:#8A6E1A; --accent-2:#6B5214; }
+
+body::after { display:none; }
+header.solid { background:rgba(255,255,255,0.82); }
+.nav-links a { color:var(--ink-mid); }
+
+.hero {
+    min-height:92vh;
+    background:
+        radial-gradient(60% 50% at 88% 8%, rgba(109,40,217,0.10), transparent 60%),
+        radial-gradient(50% 45% at 4% 95%, rgba(184,150,46,0.12), transparent 60%),
+        var(--white);
+}
+.hero h1 { font-weight:800; letter-spacing:-0.045em; line-height:1; }
+.hero h1 em {
+    font-style:normal;
+    background:linear-gradient(90deg,#0D1F3C,#6D28D9);
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero-sub { font-family:var(--font-body); font-style:normal; font-weight:500; }
+.hero-tag { border-radius:999px; }
+.section-h2 { font-weight:800; letter-spacing:-0.035em; line-height:1.05; }
+.section-h2 em { font-style:normal; color:var(--accent); }
+.section-eyebrow { color:var(--accent); }
+.section-eyebrow::before { background:var(--accent); }
+
+.btn-navy, .btn-ghost, .h-btn, .nav-links .nav-cta { border-radius:999px; }
+.h-btn.fill { background:var(--accent); }
+.h-btn.fill:hover { background:var(--accent-2); }
+.h-btn.soon { border:1px dashed var(--border); color:var(--muted); cursor:default; }
+
+.hero-card { border-radius:18px; background:#fff; box-shadow:0 24px 60px -28px rgba(13,31,60,0.3); }
+.d-badge { border-radius:10px; }
+.d-badge.violet { background:rgba(109,40,217,0.1); color:#6D28D9; border:1px solid rgba(109,40,217,0.25); }
+.d-badge.teal   { background:rgba(15,118,110,0.1); color:#0F766E; border:1px solid rgba(15,118,110,0.25); }
+
+.hub-grid { gap:1.5rem; background:none; border:none; overflow:visible; }
+.hub-card, .app-card { border:1px solid var(--border); border-radius:16px; background:#fff; transition:box-shadow .3s, transform .3s; }
+.hub-card:hover, .app-card:hover { background:#fff; box-shadow:0 12px 36px rgba(13,31,60,0.09); transform:translateY(-3px); }
+.app-card::before { background:var(--accent); }
+.hub-logo, .app-icon { border-radius:12px; }
+.app-icon { width:52px; height:52px; color:var(--accent); }
+.hub-card h3 { font-size:1.45rem; letter-spacing:-0.03em; }
+.app-card h4, .book-info h4, .f-brand-name { font-weight:700; letter-spacing:-0.02em; }
+.app-tag { border-radius:999px; }
+.app-tag.navy { color:var(--accent); border-color:var(--border); }
+.card-tags { display:flex; flex-wrap:wrap; gap:0.4rem; margin-bottom:1.4rem; }
+.app-grid.two { grid-template-columns:repeat(2,1fr); }
+.book-card, .founder-img { border-radius:16px; }
+.founder-quote { border-radius:0 12px 12px 0; }
+.founder-quote p { font-family:var(--font-body); font-style:normal; font-size:1.05rem; }
+
+.footer-top { grid-template-columns:1.6fr repeat(4,1fr); }
+.footer-bottom a { color:rgba(255,255,255,0.4); text-decoration:none; }
+
+/* Legal pages */
+.legal { max-width:760px; margin:0 auto; padding:130px 1.5rem 5rem; }
+.legal h1 { font-family:var(--font-display); font-size:clamp(2rem,4vw,3rem); font-weight:800; letter-spacing:-0.035em; margin-bottom:0.5rem; }
+.legal .updated { font-family:var(--font-mono); font-size:0.72rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase; margin-bottom:2.5rem; }
+.legal h2 { font-family:var(--font-display); font-size:1.25rem; font-weight:700; letter-spacing:-0.02em; margin:2.2rem 0 0.6rem; }
+.legal p, .legal li { font-size:0.95rem; line-height:1.85; color:var(--ink-mid); }
+.legal ul { padding-left:1.3rem; margin:0.5rem 0; }
+.legal a { color:var(--navy); }
+
+@media (max-width:1024px) {
+    .footer-top { grid-template-columns:1fr 1fr; gap:2rem; }
+}
+@media (max-width:768px) {
+    .app-grid.two { grid-template-columns:1fr; }
+    .footer-top { grid-template-columns:1fr; gap:2rem; }
+}
+
+/* Founder — Journal of a CEO */
+.founder-book {
+    display:flex; align-items:center; gap:1.2rem;
+    margin-top:2rem; padding:1rem;
+    border:1px solid var(--border); border-radius:16px; background:#fff;
+    text-decoration:none; transition:box-shadow .3s, transform .3s;
+}
+.founder-book:hover { box-shadow:0 12px 36px rgba(13,31,60,0.09); transform:translateY(-2px); }
+.founder-book-cover {
+    flex:0 0 84px; aspect-ratio:3/4; border-radius:8px; overflow:hidden;
+    background:var(--paper); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--font-display); font-weight:700; color:var(--navy);
+}
+.founder-book-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+.founder-book-info h4 { font-family:var(--font-display); font-size:1.15rem; font-weight:700; color:var(--ink); letter-spacing:-0.02em; margin:0.2rem 0 0.4rem; }
+.founder-book-info p { font-size:0.82rem; line-height:1.7; color:var(--muted); }
